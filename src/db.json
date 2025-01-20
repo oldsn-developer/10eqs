@@ -1,0 +1,19 @@
+{
+    "products": [
+      { "product_name": "Organic Coffee Beans (1lb)", "market_price": 13.50 },
+      { "product_name": "Premium Green Tea (50 bags)", "market_price": 9.00 },
+      { "product_name": "Masala Chai Mix (12oz)", "market_price": 10.00 },
+      { "product_name": "Yerba Mate Loose Leaf (1lb)", "market_price": 14.00 },
+      { "product_name": "Hot Chocolate Mix (1lb)", "market_price": 8.50 },
+      { "product_name": "Earl Grey Tea (100 bags)", "market_price": 12.00 },
+      { "product_name": "Espresso Beans (1lb)", "market_price": 18.00 },
+      { "product_name": "Chamomile Tea (30 bags)", "market_price": 7.00 },
+      { "product_name": "Matcha Green Tea Powder (4oz)", "market_price": 20.00 },
+      { "product_name": "Decaf Coffee Beans (1lb)", "market_price": 16.50 },
+      { "product_name": "Mint Tea (25 bags)", "market_price": 8.00 },
+      { "product_name": "Instant Coffee (8oz)", "market_price": 12.00 },
+      { "product_name": "Rooibos Tea (40 bags)", "market_price": 10.00 },
+      { "product_name": "cold brew concentrate", "market_price": 15.00 }
+    ]
+  }
+  

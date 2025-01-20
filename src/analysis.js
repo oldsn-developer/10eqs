@@ -1,4 +1,4 @@
-const { ingestCSV, fetchExternalData, cleanData } = require('./utils');
+const { ingestCSV, fetchExternalData, cleanData, startJsonServer, stopJsonServer } = require('./utils');
 const fs = require('fs');
 
 /* Process data, create insights, and write to report.md 
@@ -66,15 +66,26 @@ async function createReport(products) {
 
     if (!csvFilePath) {
         console.error('Please provide the path to the products.csv file.');
+        return;
     }
 
     try {
+        // Start JSON server
+        console.log('Starting JSON server...');
+        const server = await startJsonServer();
+
         // Read CSV
         const ourProducts = await ingestCSV(csvFilePath);
-        // Clean CSV
-        const cleanedData = cleanData(ourProducts);
 
+        // Clean CSV
+        const cleanedData = await cleanData(ourProducts);
+
+        // Create report
         await createReport(cleanedData);
+
+        // Stop the server
+        await stopJsonServer(server);
+
     } catch (error) {
         console.error('Error creating report:', error);
     }

@@ -27,7 +27,7 @@ async function ingestCSV(filePath) {
     @param: Array<Object> products - The set of company's products
     @returns Array<Object> products - The cleaned and normalized set of products
 */
-function cleanData(products) {
+async function cleanData(products) {
     return products.map((product) => {
         const issues = [];
 
@@ -69,32 +69,62 @@ function cleanData(products) {
     });
 }
 
-
 /* Fetch External Data Source 
     @param string productName - The name of the product to fetch the market price for.
     @returns Object mockMarketData[productName] - Returns data for specific product name.
 */
 async function fetchExternalData(productName) {
-    
-    const mockMarketData = {
-        'Organic Coffee Beans (1lb)': 13.50,
-        'Premium Green Tea (50 bags)': 9.00,
-        'Masala Chai Mix (12oz)': 10.00,
-        'Yerba Mate Loose Leaf (1lb)': 14.00,
-        'Hot Chocolate Mix (1lb)': 8.50,
-        'Earl Grey Tea (100 bags)': 12.00,
-        'Espresso Beans (1lb)': 18.00,
-        'Chamomile Tea (30 bags)': 7.00,
-        'Matcha Green Tea Powder (4oz)': 20.00,
-        'Decaf Coffee Beans (1lb)': 16.50,
-        'Mint Tea (25 bags)': 8.00,
-        'Instant Coffee (8oz)': 12.00,
-        'Rooibos Tea (40 bags)': 10.00,
-        'cold brew concentrate': 15.00
-    };
-    
-    return mockMarketData[productName] || null;
-    
-  }
+    try {
+        const url = `http://localhost:3000/products`;
+        const response = await axios.get(url);
+        const products = response.data;
 
-  module.exports = {ingestCSV, fetchExternalData, cleanData}
+        const product = products.find(p => p.product_name === productName);
+
+        if (!product) {
+            console.warn("Product not found.");
+            return null;
+        }
+
+        // Return market price if it exists, else handle gracefully
+        return product.market_price || 'Market price not available';
+    } catch (error) {
+        console.error('Error fetching external data:', error.message);
+        return null;
+    }
+}
+
+const { exec } = require('child_process');
+
+/* Start JSON Server 
+    Starts the JSON Server for mock api data.
+    @returns Promise<Object> - Resolves with server process or rejects with an error.
+*/
+async function startJsonServer() {
+    return new Promise((resolve, reject) => {
+        const server = exec('npx json-server --watch src/db.json --port 3000');
+
+        server.stdout.on('data', (data) => {
+            console.log(`Server Output: ${data}`);
+            if (data.includes('JSON Server started')) {
+                resolve(server);
+            }
+        });
+
+        server.stderr.on('data', (err) => {
+            console.error(`Server Error: ${err}`);
+            reject(new Error(`Error starting JSON Server: ${err}`));
+        });
+    });
+}
+
+/* Stop JSON Server */
+async function stopJsonServer(server) {
+    return new Promise((resolve, reject) => {
+        server.kill();
+        console.log('JSON server stopped.');
+        resolve();
+    });
+}
+
+module.exports = { ingestCSV, fetchExternalData, cleanData, startJsonServer, stopJsonServer };

@@ -40,7 +40,9 @@ node <path-to-analysis.js> <path-to-products.csv>
 ```
 
 This will:
+- Spin up Mock API (json-server)
 - Read the CSV file.
+- Ingest "external data" from API.
 - Perform data cleaning and log corrections.
 - Generate a `report.md` file with pricing insights.
 
@@ -52,6 +54,7 @@ This will:
 project-root/
 ├── data/                # Directory for input CSV files
 ├── src/
+│   ├── db.json          # Represents external data API for market prices.
 │   ├── utils.js         # Contains data ingestion, cleaning, and utility functions
 │   ├── analysis.js      # Handles report generation and insights
 ├── report.md            # Generated report with insights and recommendations
