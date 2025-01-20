@@ -1,8 +1,8 @@
 # 10eqs
 
-# Product Insights Generator
+# Product Insights Analyzer
 
-This project analyzes product pricing data, cleanses the input dataset, and generates a report with insights and recommendations for each product.
+This project analyzes product pricing data, cleans the input dataset, and generates a report with insights and recommendations for each product.
 
 ## Features
 
@@ -73,8 +73,8 @@ This file contains:
 
 ---
 
-## Notes
+## Notes and Issues
 
-- There were initial data discrepencies, like missing data in the CSV due to truncation in the PDF.
-- Ensure the `products.csv` file follows a consistent structure.
+- There were initial data discrepencies, like missing data in the CSV due to truncation in the PDF. The rest of data discrepencies are recorder in the report.md file.
+- Ensure the `products.csv` file follows a consistent structure. The data available were columns: product_name, our_price, category, current_stock, restock_threshold
 - Customize `fetchExternalData` in `utils.js` to integrate with your preferred API for market prices. I used mock data as there were no public, operating APIs for this type of grocery price data.
