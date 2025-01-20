@@ -84,8 +84,8 @@ This file contains:
 
 # Timeline
 
-Setup: 5 minutes
-Data Cleaning: 20 minutes
-Data Processing and Data Integration: 40 minutes
-Generate Report: 20 minutes
-ReadME Write-Up: 15 minutes
+- Setup: 5 minutes
+- Data Cleaning: 20 minutes
+- Data Processing and Data Integration: 40 minutes
+- Generate Report: 20 minutes
+- ReadMe Write-Up: 15 minutes
