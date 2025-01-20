@@ -78,3 +78,11 @@ This file contains:
 - There were initial data discrepencies, like missing data in the CSV due to truncation in the PDF.
 - Ensure the `products.csv` file follows a consistent structure.
 - Customize `fetchExternalData` in `utils.js` to integrate with your preferred API for market prices. I used mock data as there were no public, operating APIs for this type of grocery price data.
+
+# Timeline
+
+Setup: 5 minutes
+Data Cleaning: 20 minutes
+Data Processing and Data Integration: 40 minutes
+Generate Report: 20 minutes
+ReadME Write-Up: 15 minutes
