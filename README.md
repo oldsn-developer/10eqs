@@ -1,4 +1,4 @@
-# 10eqs
+# 10eqs Interview Exercise
 
 # Product Insights Generator
 
